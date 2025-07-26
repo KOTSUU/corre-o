@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculadora de Correção de Esmalte</title>
+</head>
+<body>
+  <script>
+    const recipiente = parseInt(prompt("Recipiente 2, 6 ou 7 ?"));
+    const densid = prompt("Qual densidade do esmalte ?").replace(",", ".");
+    const espavazio = parseFloat(prompt("Qual é a medida de espaço vazio no tanque ou cheio na BB ?"));
+    const vaziofinal = parseFloat(prompt("Quanto de espaço vazio ficará ?"));
+    const percent = parseFloat(prompt("Qual porcentagem da correção ?"));
+
+    let DiaCorre = 0;
+    let FatCorre = 0;
+
+    if (recipiente === 2){
+       DiaCorre = 1.515;
+    } else if (recipiente === 6){
+        DiaCorre = 9.5;
+    } else if (recipiente === 7){
+        DiaCorre = 12.67;
+    } else {
+        alert("Recipiente não existente para correção");
+    }
+
+    switch (densid) {
+      case "1.90":
+        FatCorre = 1.453;
+        break;
+      case "1.70":
+        FatCorre = 1.130;
+        break;
+      case "1.69":
+      case "1.71":
+        FatCorre = 1.114;
+        break;
+      case "1.81":
+        FatCorre = 1.308;
+        break;
+      case "1.91":
+        FatCorre = 1.469;
+        break;
+      default:
+        alert("Densidade inválida");
+    }
+
+    if (DiaCorre > 0 && FatCorre > 0) {
+      const espacoAcorrigi = espavazio - vaziofinal;
+      const Quantidade = espacoAcorrigi * DiaCorre * FatCorre;
+      const QuantidadeCorrecao = (Quantidade * percent) / 100;
+      alert("Quantidade de correção: " + QuantidadeCorrecao.toFixed(2));
+    } else {
+      alert("Erro nos dados inseridos.");
+    }
+  </script>
+</body>
+</html>
